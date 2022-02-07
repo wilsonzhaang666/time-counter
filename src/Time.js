@@ -4,6 +4,7 @@ const Time = () => {
   const [time, setTime] = React.useState(0);
   const [currentTime, setCurrentTime] = React.useState(0);
   const [minutes, setMinute] = React.useState(0);
+  const [hours, setHours] = React.useState(0);
   const endtime = new Date();
   endtime.setHours(17, 30, 0);
   console.log(endtime);
@@ -11,7 +12,7 @@ const Time = () => {
 
   const hour = endtime.getHours() - date.getHours() - 1;
 
-  const minute = endtime.getMinutes() - date.getMinutes() + 60;
+  const minute = endtime.getMinutes() - date.getMinutes() + 60 - 1;
 
   const second = 60 - date.getSeconds();
   const CurrentHour = date.getHours();
@@ -20,11 +21,12 @@ const Time = () => {
   useEffect(() => {
     if (minute > 60) {
       setMinute(minute - 60);
+      setHours(hour + 1);
     } else {
       setMinute(minute);
+      setHours(hour);
     }
   });
-  console.log(minutes);
   React.useEffect(() => {
     const timer = window.setInterval(() => {
       setTime((second) => second + 1);
@@ -52,7 +54,7 @@ const Time = () => {
 
       <div className="container">
         <div>
-          {hour}:{minutes}:{second}
+          {hours}:{minutes}:{second}
         </div>
       </div>
     </>
